@@ -8,174 +8,13 @@ import { LocationSearchContext } from "../../../services/location-search/locatio
 import Geocoder from "react-native-geocoding";
 import { API_KEY } from "../../../../key";
 import { uniqueId } from "lodash";
-import {Text} from 'react-native'
-
-
-points = [
-    { latitude: 40.7828, longitude: -74.0065, weight: 1 },
-    { latitude: 41.7121, longitude: -74.0042, weight: 1 },
-    { latitude: 40.7102, longitude: -75.0060, weight: 1 },
-    { latitude: 40.7123, longitude: -74.0052, weight: 1 },
-    { latitude: 40.7032, longitude: -74.0042, weight: 1 },
-    { latitude: 40.7198, longitude: -74.0024, weight: 1 },
-    { latitude: 41.7223, longitude: -74.0053, weight: 1 },
-    { latitude: 40.7181, longitude: -74.0042, weight: 1 },
-    { latitude: 40.7124, longitude: -74.0023, weight: 1 },
-    { latitude: 40.7648, longitude: -74.0012, weight: 1 },
-    { latitude: 41.7128, longitude: -74.0027, weight: 1 },
-    { latitude: 40.7223, longitude: -74.0153, weight: 1 },
-    { latitude: 40.7193, longitude: -74.0052, weight: 1 },
-    { latitude: 40.7241, longitude: -75.0013, weight: 1 },
-    { latitude: 41.7518, longitude: -74.0085, weight: 1 },
-    { latitude: 40.7599, longitude: -74.0093, weight: 1 },
-    { latitude: 41.7523, longitude: -74.0021, weight: 1 },
-    { latitude: 40.7342, longitude: -74.0152, weight: 1 },
-    { latitude: 40.7484, longitude: -75.0042, weight: 1 },
-    { latitude: 40.7929, longitude: -75.0023, weight: 1 },
-    { latitude: 40.7292, longitude: -74.0013, weight: 1 },
-    { latitude: 40.7940, longitude: -74.0048, weight: 1 },
-    { latitude: 40.7874, longitude: -74.0052, weight: 1 },
-    { latitude: 40.7824, longitude: -74.0024, weight: 1 },
-    { latitude: 40.7232, longitude: -74.0094, weight: 1 },
-    { latitude: 41.7342, longitude: -74.0152, weight: 1 },
-    { latitude: 41.7484, longitude: -74.0012, weight: 1 },
-    { latitude: 41.7929, longitude: -74.0073, weight: 1 },
-    { latitude: 41.7292, longitude: -74.0013, weight: 1 },
-    { latitude: 41.7940, longitude: -74.0058, weight: 1 },
-    { latitude: 41.7874, longitude: -74.0352, weight: 1 },
-    { latitude: 41.7824, longitude: -74.0024, weight: 1 },
-    { latitude: 41.7232, longitude: -74.0094, weight: 1 },
-    { latitude: 41.0342, longitude: -75.0152, weight: 1 },
-    { latitude: 41.0484, longitude: -75.0012, weight: 1 },
-    { latitude: 41.0929, longitude: -75.0073, weight: 1 },
-    { latitude: 41.0292, longitude: -74.0013, weight: 1 },
-    { latitude: 41.0940, longitude: -74.0068, weight: 1 },
-    { latitude: 41.0874, longitude: -74.0052, weight: 1 },
-    { latitude: 41.0824, longitude: -74.0024, weight: 1 },
-    { latitude: 41.0232, longitude: -74.0014, weight: 1 },
-    { latitude: 41.7874, longitude: -74.0352, weight: 1 },
-    { latitude: 31.594915, longitude: -84.224236, weight: 1 },
-    { latitude: 39.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 25.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 37.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 35.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 35.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 37.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 39.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 39.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 25.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 37.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 35.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 35.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 37.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 39.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 39.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 25.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 37.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 35.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 35.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 37.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 39.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 39.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 25.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 37.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 35.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 35.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 37.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 39.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 39.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 25.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 37.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 35.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 35.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 37.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 39.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 39.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 25.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 37.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 35.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 35.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 37.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 39.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 39.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 25.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 37.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 35.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 35.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 37.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 39.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 39.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 25.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 37.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 35.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 35.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 37.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 39.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 39.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 43.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 25.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 37.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 35.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 35.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 37.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 31.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 31.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 31.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 31.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 31.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 31.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 41.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 21.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 31.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 31.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 31.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 31.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 31.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 31.741550, longitude: -90.256218, weight: 1 },
-    { latitude: 41.828850, longitude: -115.837860, weight: 1 },
-    { latitude: 21.750156, longitude: -80.279640, weight: 1 },
-    { latitude: 41.329334, longitude: -73.094406, weight: 1 },
-    { latitude: 31.630322, longitude: -104.790543, weight: 1 },
-    { latitude: 31.618671, longitude: 91.271286, weight: 1 },
-    { latitude: 31.678970, longitude: 35.678970, weight: 1 },
-    { latitude: 31.865894, longitude: -88.259773, weight: 1 },
-    { latitude: 41.006950, longitude: -91.973419, weight: 1 },
-    { latitude: 31.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 31.370121, longitude: -74.438942, weight: 1 },
-    { latitude: 31.370121, longitude: -74.438942, weight: 1 },
-
-];
+import { Text, View, Platform } from 'react-native'
+import { ReportEntryContext } from "../../../services/report-entry/report-entry.context";
+import { getReports } from '../../../services/report-entry/report-entry.service'
+import { FilterButton, HelpButton } from "../components/map-buttons.component";
+import { IncidentInfo } from "../components/callout.coponent";
+import { ActivityIndicator } from "react-native-paper";
+import { HelpPopup } from '../components/help.component'
 
 
 Geocoder.init(API_KEY)
@@ -186,8 +25,47 @@ const Map = styled(MapView)`
 `
 
 export const MapScreen = ({ navigation }) => {
+    const startupHeatmap = Platform.OS === "android" ? false : true
     const [viewPort, setViewPort] = useState()
+    const [points, setPoints] = useState([])
+    const [weightedCoords, setWeightedCoords] = useState([])
+    const [showHeatmap, setShowHeatmap] = useState(startupHeatmap)
+    const [showMarkers, setShowMarkers] = useState(!startupHeatmap)
+    const [showInfo, setShowInfo] = useState(false)
+    const [initiated, setInitiated] = useState(false)
+    const [detailsOpen, setDetailsOpen] = useState(false)
+    const [showHelp, setShowHelp] = useState(false)
+    const [currentPoint, setCurrentPoint] = useState(null)
     const { isSearching, notSearching, location, isReporting } = useContext(LocationSearchContext)
+
+    const heatmap = () => {
+        setShowHeatmap(true)
+        setShowMarkers(false)
+    }
+
+    const markers = () => {
+        setShowHeatmap(false)
+        setShowMarkers(true)
+    }
+
+    const toggleHelp = () => {
+        setShowHelp(!showHelp)
+        setInitiated(true)
+    }
+
+    useEffect(async () => {
+        const res = await getReports()
+        let points = []
+        let coords = []
+        const docs = res.forEach((doc) => {
+            points = [...points, doc.data()]
+            coords = [...coords, doc.data().coordinates]
+        })
+        setPoints(points)
+        setWeightedCoords(coords)
+    }, [])
+
+
     const mapref = useRef(null)
 
     const getCoords = async (location) => {
@@ -207,19 +85,39 @@ export const MapScreen = ({ navigation }) => {
 
     useEffect(() => {
         if (location.length > 3 && !isSearching && !isReporting) {
-            console.log('this is')
+            console.log('zooming in')
             getCoords(location)
         }
     }, [location])
 
+    let count = 0
+
     return (
         <>
             <AutoCompleteSearch isMap={true} />
+            <View
+                style={{
+                    marginTop: 125,
+                    position: 'absolute', flex: 1, flexDirection: 'row', zIndex: 500
+                }}
+            >
+                <FilterButton title='Heatmap' onPress={heatmap} />
+                <FilterButton title='Show Markers' onPress={markers} />
+
+            </View>
+            <HelpButton onPress={toggleHelp} />
+
+            {showHelp && <HelpPopup animate="bounceInRight" />}
+            {initiated && !showHelp && <HelpPopup animate="bounceOutRight" />}
+
+
             <Map
                 ref={mapref}
                 provider={PROVIDER_GOOGLE}
                 onPress={() => {
                     if (isSearching) {
+                        setCurrentPoint(null)
+                        setShowInfo(false)
                         dismissKeyboard()
                         notSearching()
                     }
@@ -233,38 +131,46 @@ export const MapScreen = ({ navigation }) => {
                 loadingEnabled
 
             >
-                 {points.map((point) => {
+                {showMarkers && points.map((point) => {
                     return (
-                    <MapView.Marker
-                    flat = {true}
-                    opacity={0.0}
-                    calloutAnchor= {{ x: 0.5, y: .9 }}
-                    key = {uniqueId()}
-                    title = {uniqueId()}
-                    coordinate = {{latitude: point.latitude, longitude: point.longitude }}
-                    >
-                        <MapView.Callout onPress = {() => {}}>
-                            <Text>Ross Eye Raped Me</Text>
-                        </MapView.Callout>
+                        <MapView.Marker
+                            tappable
+                            flat={true}
+                            key={uniqueId()}
 
-                    </MapView.Marker>
-                    
+                            coordinate={{ latitude: point.coordinates.latitude, longitude: point.coordinates.longitude }}
+                            onPress={() => {
+                                setShowInfo(true)
+                                setCurrentPoint(point)
+                            }}
+                        >
+                        </MapView.Marker>
                     )
-                   
                 })}
-                <Heatmap
-                    points={points}
+                {showHeatmap && <Heatmap
+                    points={weightedCoords}
                     radius={40}
                     opacity={1}
                     gradient={{
-                        colors: ["navy", "blue", "green", "yellow", "red"],
-                        startPoints: Platform.OS === 'ios' ? [0.01, 0.04, 0.1, 0.45, 0.5] :
-                            [0.1, 0.25, 0.5, 0.75, 1],
+                        colors: ["navy", "blue", "green", "yellow", 'red'],
+                        startPoints: Platform.OS === 'ios' ? [0.1, 0.2, 0.3, 0.4, .5] :
+                            [0.13, 0.25, 0.5, 0.75, 1],
                         colorMapSize: 2000
                     }}
                 >
-                </Heatmap>
+                </Heatmap>}
+
             </Map>
+            {showInfo &&
+                <IncidentInfo info={currentPoint} animate={"bounceInUp"} close={() => {
+                    setShowInfo(false)
+                    setDetailsOpen(true)
+                }} />
+            }
+            {!showInfo && detailsOpen  && <IncidentInfo info={currentPoint} animate={"bounceOutDown"} close={() => {
+                    setShowInfo(false)
+                    setDetailsOpen(true)
+                }} /> }
         </>
 
 

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { ReportSearchContext } from '../report-location-search/report-location-search.context'
-import { uploadImage, storeReport } from './report-entry.service'
+import { uploadImage, storeReport, getDeviceReports, getReports} from './report-entry.service'
 
 
 export const ReportEntryContext = createContext()
@@ -13,38 +13,20 @@ export const ReportEntryContextProvider = ({ children, navigation }) => {
     const [type, setType] = useState('')
     const [control, setControl] = useState('')
     const [photo, setPhoto] = useState('')
+    const [reportToHotline, setReportToHotline] = useState(false)
     const [uploading, setUploading] = useState(false)
     const [submitted, setSubmitted] = useState(false)
 
     const { reportLocation, createNewReportLocation } = useContext(ReportSearchContext)
-
-    // useEffect(() =>{
-    //     console.log("Should be true: " +  submitted)
-    // }, [submitted])
-
-
-
+   
     const submitReport = async () => {
-        let stored = false
-        try {
-            if (photo) {
-                uploadImage(photo).then((photoUrl) => {
-                    stored = storeReport({
-                        gender, age, description, dateTime, type, photoUrl, control, reportLocation
-                    })
-                })
-            } else {
-                stored = storeReport({
-                    gender, age, description, dateTime, type, photoUrl: photo, control, reportLocation
-                })
-            }
-            return stored
-        } catch (e) {
-            console.log(e)
-            console.log(stored)
-            return stored
-        }
-
+        setUploading(true)
+        const photoUrl = photo.length ? await uploadImage(photo) : ''
+        const res = await storeReport({
+            gender, age, description, dateTime, type, photoUrl, control, reportLocation, reportToHotline
+        })
+        setUploading(false)
+        return res
     }
 
     const resetAll = () => {
@@ -55,6 +37,7 @@ export const ReportEntryContextProvider = ({ children, navigation }) => {
         setType('')
         setControl('')
         setPhoto('')
+        setReportToHotline(false)
         createNewReportLocation('')
     }
 
@@ -68,6 +51,8 @@ export const ReportEntryContextProvider = ({ children, navigation }) => {
                 type,
                 control,
                 photo,
+                reportToHotline,
+                uploading,
                 setGender,
                 setAge,
                 setDescription,
@@ -75,8 +60,9 @@ export const ReportEntryContextProvider = ({ children, navigation }) => {
                 setType,
                 setControl,
                 setPhoto,
+                setReportToHotline, 
                 submitReport,
-                resetAll
+                resetAll,
             }}>
             {children}
         </ReportEntryContext.Provider>

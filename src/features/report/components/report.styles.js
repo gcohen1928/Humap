@@ -48,16 +48,17 @@ export const SectionHeader = ({ title }) => {
 }
 
 const Subtitle = styled.Text`
-    font-size: 24px
+    font-size: 35px
     font-weight: bold
     align-self: center
     padding: 10px
     color: ${colors.brand.tertiary}
+    text-align: center
 `
 
 const SectionView = styled.View`
     margin-top: 30px
-    border-bottom-width: 3px
+    border-bottom-width: 5px
     border-color: ${colors.brand.tertiary}
     width: 80%
     align-self: center
@@ -67,12 +68,12 @@ const SectionView = styled.View`
 export const Caption = styled.Text`
     font-size: 13px
     font-style: italic
-    color: ${colors.ui.primary}
+    color: ${colors.ui.quaternary}
 `
 export const CaptionContainer = styled.View`
     align-self: center
     padding: 12px
-    background-color: ${colors.brand.primary}
+    background-color: ${colors.brand.tertiary}
     border-radius: 10px
     margin-top: 10px
     max-width: 80%
@@ -95,7 +96,7 @@ export const SubmitButton = ({ onSubmit, onPress, title, type}) => {
                 width: 350,
                 height: 50,
                 marginTop: 30,
-                marginBottom: 40
+                
 
             }}
 

@@ -13,34 +13,38 @@ import { SubmitModal } from '../components/submit-modal.component'
 import { ReportEntryContext } from '../../../services/report-entry/report-entry.context'
 import { useEffect } from 'react/cjs/react.development'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import Spinner from 'react-native-loading-spinner-overlay'
+import { HotlineCheckBox } from '../components/checkbox.component'
 
 
 export const ReportScreen = ({ navigation }) => {
-    const { resetAll } = useContext(ReportEntryContext)
+    const { resetAll, uploading } = useContext(ReportEntryContext)
 
     let submitted = false
     const setSubmitted = (val) => {
         submitted = val
         console.log(submitted + " has changed from " + !submitted)
     }
+    count = 0
 
     const listener = navigation.addListener('beforeRemove', (e) => {
-        if (e.data.action.type === "RESET"){
-            return 
+        if (e.data.action.type === "RESET" || count > 0) {
+            return
         }
+        count += 1
         e.preventDefault();
-
         Alert.alert(
             'Discard changes?',
             'You have unsaved changes. Are you sure to discard them and leave the screen?',
             [
-                { text: "Don't leave", style: 'cancel', onPress: () => { } },
+                { text: "Don't leave", style: 'cancel', onPress: () => { count -= 1 } },
                 {
                     text: 'Discard',
                     style: 'destructive',
                     // If the user confirmed, then we dispatch the action we blocked earlier
                     // This will continue the action that had triggered the removal of the screen
                     onPress: () => {
+                        count -= 1
                         resetAll()
                         navigation.dispatch(e.data.action)
                     }
@@ -57,10 +61,15 @@ export const ReportScreen = ({ navigation }) => {
     return (
 
         <KeyboardAwareScrollView>
-            <BackButton onPress={() => navigation.navigate("ReportInstructions")} />
+            {!!uploading && <Spinner
+                visible={true}
+                textContent={'Loading...'}
+                textStyle={{color: '#FFF'}}
+            /> }
+            <BackButton onPress={() => navigation.navigate("Create a Report")} />
             <Title>Report an Incident</Title>
             <CaptionContainer >
-                <Caption>{"Note: All fields are optional EXCEPT location. For help, press the button in the top-right"}</Caption>
+                <Caption>{"Note: All fields are optional EXCEPT location."}</Caption>
             </CaptionContainer>
             <SectionHeader title="About You" />
             <Selector category='gender' title="Gender:" options={types.GENDER} />
@@ -73,6 +82,7 @@ export const ReportScreen = ({ navigation }) => {
             <Selector category='type' position={1} title="Type of Trafficking or Assault:" options={types.TYPES_OF_TRAFFICKING} />
             <Selector title="Means of Control:" options={types.MEANS_OF_CONTROL} />
             <ChooseImage />
+            <HotlineCheckBox />
             <SubmitModal navigation={navigation} />
 
         </KeyboardAwareScrollView>

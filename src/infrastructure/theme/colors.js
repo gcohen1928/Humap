@@ -3,6 +3,10 @@ export const colors = {
       primary: "coral",
       secondary: "#757575",
       tertiary: "#6D5FB9",
+      quaternary: "#d0c7e8",
+      quinteriary: "#ff6250",
+      sixth: "#ff8e50",
+      
       muted: "#C6DAF7",
     },
     ui: {

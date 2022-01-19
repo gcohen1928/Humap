@@ -4,10 +4,12 @@ import styled from 'styled-components'
 import { colors } from '../../../../infrastructure/theme/colors'
 import CardSilder from 'react-native-cards-slider'
 import { View } from 'react-native'
+import { SubmitButton } from '../report.styles'
+import call from 'react-native-phone-call'
 
 export const Title = styled.Text`
+
 align-self: center
-    margin-top: 30px
     font-size: 40px
     font-weight: bold
     color: ${colors.brand.primary}
@@ -23,7 +25,7 @@ text-align: center
 `
 
 export const QuestionContainer = styled.View`
-    height: 350px
+
     width: 90%
     border-radius: 10px
     background-color: ${colors.brand.tertiary}
@@ -36,6 +38,7 @@ width: 90%
 border-bottom-width: 2px
 border-bottom-color: ${colors.brand.primary}
 align-self: center
+margin-bottom: 20px
 `
 
 export const Question = styled.Text`
@@ -44,23 +47,24 @@ export const Question = styled.Text`
     text-align: center
     margin-top: 20px
     font-weight: 500
+
     
 `
 
 export const Answer = styled.Text`
-padding: 12px
+padding: 6px
 font-size: 20px
 color: white
 text-align: center
-margin-top: 10px
 font-weight: 500 
+margin-bottom: 30px
 `
 
 export const InstructionText = () => {
     return (
         <>
             <Title>
-                Make A Report
+                Start here!
             </Title>
 
             <View
@@ -73,7 +77,23 @@ export const InstructionText = () => {
             <SubTitle>
                 If you are a victim of or have witnessed any incident of human trafficking, please report it here.
             </SubTitle>
+            <Line />
+            <SubTitle style = {{marginTop: 10}}>
+                If your case requires immediate attention, call the National Trafficking Hotline below: 
+            </SubTitle>
 
+            <SubmitButton 
+            type = "new"
+                    title= "1 (888) 373-7888"
+                    onPress = {() => {
+                        const args = {
+                            number: '8883737888', // String value with the number to call
+                            prompt: true // Optional boolean property. Determines if the user should be prompt prior to the call 
+                          }
+                          
+                          call(args).catch(console.error)
+                    }}
+                /> 
 
             <CardSilder style={{ marginTop: 20 }}>
                 <QuestionContainer>

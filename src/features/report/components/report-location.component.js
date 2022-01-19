@@ -5,7 +5,7 @@ import { Card } from 'react-native-paper';
 import { ScrollView, TouchableOpacity } from 'react-native';
 import { ReportSearchContext } from '../../../services/report-location-search/report-location-search.context';
 import { Input } from '../../report/components/input.component'
-import { Text, Platform } from 'react-native';
+import { Text, Platform, View } from 'react-native';
 
 
 
@@ -54,6 +54,11 @@ export const ReportAutoComplete = ({ isMap, navigation }) => {
     return (
         <>
             <Input address ={true} title="Location:" onChange={onChangeLocation} />
+            <View
+                style ={{alignItems: 'center', position: 'absolute',
+                width: "60%",
+                zIndex: 1000}}
+            >
             <SuggestionsList
             >
                 {predictions.map((prediction) => {
@@ -80,6 +85,8 @@ export const ReportAutoComplete = ({ isMap, navigation }) => {
                     )
                 })}
             </SuggestionsList>
+            </View>
+           
 
         </>
 
@@ -89,10 +96,11 @@ export const ReportAutoComplete = ({ isMap, navigation }) => {
 const isAndroid = Platform.OS === "android"
 
 const SuggestionsList =  styled(ScrollView).attrs({
-    contentContainerStyle: { justifyContent: 'center', alignSelf: 'center', width: 360, marginRight: 110 },
+    contentContainerStyle: { justifyContent: 'center', alignSelf: 'center', width: 360, marginLeft: "29%"},
 })`
     z-index: 999
     position: absolute
-    margin-top: ${isAndroid? "700px": "990px"}
-    width: 500px
+    margin-left: 20%
+    margin-top: ${isAndroid? "725px": "1035px"}
+    width: 750px
 `

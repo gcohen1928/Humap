@@ -11,17 +11,20 @@ export const ReportInstructions = ({ navigation }) => {
 
     return (
         <ScrollView contentContainerStyle={{
-            marginTop: 100,
+            marginTop: 20,
 
 
         }}>
             <View style={{ flex: 1 }}>
                 <InstructionText />
             </View>
+            <View style  = {{flex: 1}}>
+                
+            </View>
 
-            <View style = {{marginBottom: 80}}>
-                <SubmitButton
-                    type = "new"
+            <View style = {{marginBottom: 40}}>
+                <SubmitButton 
+                type = "new"
                     onPress={() => {
                         navigation.navigate("ReportForm")
                     }}
